@@ -3,3 +3,4 @@ smoke test
 release test
 mini feature 1
 mini fix 1
+mini feature 2
