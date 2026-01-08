@@ -10,14 +10,15 @@ Abweichungen von diesen Regeln werden in Pull Requests nicht akzeptiert.
 ## Grundprinzipien
 
 - Es wird **niemals direkt auf `main` gearbeitet**
+- Es gibt genau zwei Haupt-Branches: `main` (Release) und `dev` (Entwicklung)
 - Jede Änderung erfolgt in einem eigenen Branch
 - Jeder Commit muss dem **Conventional Commits Standard** folgen
-- Releases entstehen ausschließlich über **Release-Branches**
+- Releases entstehen ausschließlich durch einen **PR-Merge nach `main`**
 - `CHANGELOG.md` wird **niemals manuell bearbeitet**
 
 ---
 
-## Geschützte Branches
+## Haupt-Branches
 
 ### `main`
 
@@ -27,6 +28,15 @@ Regeln:
 - Kein Direkt-Push erlaubt
 - Änderungen nur über Pull Requests
 - `main` enthält immer den **letzten veröffentlichten Stand**
+- Ein Merge nach `main` triggert den Release
+
+### `dev`
+
+Der Branch `dev` ist der Integrations-Branch.
+
+Regeln:
+- Feature-Branches werden in `dev` gemergt
+- `dev` ist **kein** Release-Branch
 
 ---
 
@@ -34,52 +44,38 @@ Regeln:
 
 ### Erlaubte Branch-Typen
 
-Alle Branches müssen einem der folgenden Muster entsprechen:
-
-- feat/kurze-beschreibung  
+- feat/<ticket>-kurzbeschreibung  
   Für neue Features
 
-- fix/kurze-beschreibung  
+- fix/<ticket>-kurzbeschreibung  
   Für Bugfixes
 
-- docs/kurze-beschreibung  
-  Für Dokumentation
-
-- refactor/kurze-beschreibung  
-  Für interne Code-Verbesserungen ohne neues Feature
-
-- chore/kurze-beschreibung  
+- chore/<beschreibung>  
   Für Wartung, Abhängigkeiten, Konfiguration
 
-- test/kurze-beschreibung  
-  Für Tests
-
-- ci/kurze-beschreibung  
-  Für CI/CD-Änderungen
-
-- release/vMAJOR.MINOR.PATCH  
-  Für Release-Vorbereitung
+- docs/<beschreibung>  
+  Für Dokumentation
 
 ### Regeln für Branch-Namen
 
 - nur Kleinbuchstaben
 - Wörter mit Bindestrichen trennen
 - keine Sonderzeichen
-- maximal 3–5 Wörter
+- `feat/` und `fix/` **müssen** ein Ticket-Präfix enthalten
 
 ### Beispiele
 
 Gültig:
-- feat/user-login
-- fix/startup-crash
+- feat/abc-123-login-flow
+- fix/bug-456-startup-crash
 - docs/api-authentication
-- release/v1.2.0
+- chore/deps-update
 
 Ungültig:
 - feature/login
 - Bugfix123
 - meinBranch
-- release/1.2.0
+- fix/login
 
 ---
 
@@ -100,6 +96,7 @@ type(optional-scope): kurze beschreibung
 - docs
 - refactor
 - chore
+- perf
 - test
 - ci
 
@@ -132,11 +129,9 @@ Commits mit ungültigem Format werden **lokal blockiert** und **in Pull Requests
 
 ### 1. Neue Arbeit beginnen
 
-- Ausgangspunkt ist immer `main`
-- Neuer Branch wird von `main` erstellt
+- Ausgangspunkt ist immer `dev`
+- Neuer Branch wird von `dev` erstellt
 - Branch-Typ entsprechend der Aufgabe wählen
-
----
 
 ### 2. Entwickeln und committen
 
@@ -144,14 +139,11 @@ Commits mit ungültigem Format werden **lokal blockiert** und **in Pull Requests
 - ein Zweck pro Commit
 - Commit Messages strikt nach den Regeln
 
----
-
 ### 3. Pull Request erstellen
 
 Wenn die Arbeit abgeschlossen ist:
 
-- Pull Request vom Arbeitsbranch erstellen
-- Ziel-Branch ist immer ein `release/*`-Branch
+- Pull Request vom Arbeitsbranch nach `dev` erstellen
 - PR-Titel kurz und sachlich
 - PR-Beschreibung wird automatisch generiert
 
@@ -159,37 +151,10 @@ Nach Review:
 - Pull Request mergen
 - Arbeitsbranch löschen
 
----
+### 4. Release
 
-## Release-Workflow
-
-### Release-Branches
-
-Für jede Version existiert genau ein Release-Branch:
-
-- release/vMAJOR.MINOR.PATCH
-
-Beispiele:
-- release/v0.1.0
-- release/v1.2.3
-
-Regeln:
-- Release-Branches werden aus `main` erstellt
-- Sie enthalten ausschließlich Änderungen für diese Version
-- Nach dem Release werden sie gelöscht
-
----
-
-### Release durchführen
-
-1. Pull Request von `release/vX.Y.Z` nach `main` erstellen
-2. Pull Request mergen
-
-Nach dem Merge passiert automatisch:
-- Version wird bestimmt
-- Git-Tag wird erstellt
-- CHANGELOG.md wird aktualisiert
-- GitHub Release wird veröffentlicht
+- Pull Request von `dev` nach `main` erstellen
+- Nach Merge wird automatisch released (semantic-release)
 
 ---
 
@@ -206,7 +171,7 @@ Nach dem Merge passiert automatisch:
 - ❌ niemals auf `main` pushen
 - ✅ immer Feature-Branches verwenden
 - ✅ immer Conventional Commits schreiben
-- ✅ Pull Requests gehen in `release/*`
+- ✅ Releases entstehen nur über Merge nach `main`
 - ❌ Changelog nicht manuell ändern
 
 ---
