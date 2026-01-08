@@ -1,2 +1,3 @@
 Hey :)
 smoke test
+release test
