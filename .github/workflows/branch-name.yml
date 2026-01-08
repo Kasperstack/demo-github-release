@@ -1,0 +1,20 @@
+name: Branch Name
+
+on:
+  pull_request:
+    types: [opened, synchronize, reopened, edited]
+    branches: [main, dev]
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Validate branch name
+        run: |
+          BRANCH="${{ github.head_ref }}"
+          PATTERN='^(feat|fix)/[a-z0-9]+-[a-z0-9]+(-[a-z0-9]+)*$|^(chore|docs)/[a-z0-9]+(-[a-z0-9]+)*$|^dev$'
+          if [[ ! "$BRANCH" =~ $PATTERN ]]; then
+            echo "Invalid branch name: $BRANCH"
+            echo "Expected: feat/<ticket>-beschreibung, fix/<ticket>-beschreibung, chore/<beschreibung>, docs/<beschreibung>, or dev"
+            exit 1
+          fi
