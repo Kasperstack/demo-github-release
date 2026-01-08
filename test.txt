@@ -1,3 +1,8 @@
 Hey :)
 smoke test
 release test
+mini feature 1
+mini fix 1
+mini feature 2
+mini fix 2
+mini feature 3
