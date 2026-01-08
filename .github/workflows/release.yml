@@ -20,11 +20,11 @@ jobs:
         with:
           fetch-depth: 0
 
-      # 2. Node.js LTS
+      # 2. Node.js (required by semantic-release v25)
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: '20.x'
+          node-version: '22.14.0'
 
       # 3. Dependencies installieren
       - name: Install dependencies
