@@ -1,5 +1,15 @@
 # Changelog
 
+## 1.2.0 (2026-01-08)
+
+* Merge pull request #20 from Kasperstack/feat/abc-126-mini-sim ([b6adbb7](https://github.com/Kasperstack/demo-github-release/commit/b6adbb7)), closes [#20](https://github.com/Kasperstack/demo-github-release/issues/20)
+* Merge pull request #21 from Kasperstack/dev ([835e9dc](https://github.com/Kasperstack/demo-github-release/commit/835e9dc)), closes [#21](https://github.com/Kasperstack/demo-github-release/issues/21)
+* feat(test): add mini marker 1 ([ad3ec9e](https://github.com/Kasperstack/demo-github-release/commit/ad3ec9e))
+* feat(test): add mini marker 3 ([1731f38](https://github.com/Kasperstack/demo-github-release/commit/1731f38))
+* feat(test): add mini marker 5 ([377ecf8](https://github.com/Kasperstack/demo-github-release/commit/377ecf8))
+* fix(test): add mini marker 2 ([a965ca7](https://github.com/Kasperstack/demo-github-release/commit/a965ca7))
+* fix(test): add mini marker 4 ([f3b900c](https://github.com/Kasperstack/demo-github-release/commit/f3b900c))
+
 ## 1.1.0 (2026-01-08)
 
 * Merge branch 'main' into dev ([71c71ba](https://github.com/Kasperstack/demo-github-release/commit/71c71ba))
